@@ -28,9 +28,8 @@ int main( int argc, char** argv ) {
     strcpy( outSPBRfile, OUT_FILE ); 
 
     if ( argc < 9 ) {
-        std::cout   << "\n----- USAGE -----\n" << argv[0] << " [input_file] [output_file] x_min y_min z_min x_max y_max z_max\n"
-                    << "\n----- For example -----\n"
-                    << "$ " << argv[0] << " input.ply output.spbr\n" << std::endl;
+        std::cout   << "\nUSAGE:   " << "$ " << argv[0] << " [input_file] [output_file] [x_min] [y_min] [z_min] [x_max] [y_max] [z_max]\n"
+                    << "EXAMPLE: " << "$ " << argv[0] << " input.ply output.spbr\n" << std::endl;
         exit(1);
 
     } else {
@@ -56,10 +55,10 @@ int main( int argc, char** argv ) {
     
     
     WritingDataType type = Ascii;
-    writeSPBR(  ply,                    /* kvs::PolygonObject *_ply        */  
-                outSPBRfile,            /* char*              _filename    */  
+    writeSPBR(  ply,                   /* kvs::PolygonObject *_ply        */  
+                outSPBRfile,           /* char*              _filename    */  
                 select_area_min_max,   /* float              _select_area_min_max[] */
-                type                    /* WritingDataType    _type        */
+                type                   /* WritingDataType    _type        */
                 );       
 
     // ----- Convert "PolygonObject（KVS）" to "PointObject（KVS）" -----
@@ -72,7 +71,8 @@ int main( int argc, char** argv ) {
     // ----- Exec. SPBR -----
 #ifdef EXEC_VIA_SPBR
     std::string out_noised_spbr( outSPBRfile );
-    std::string EXEC("spbr ");
+    // std::string EXEC("spbr ");
+    std::string EXEC("spbr_auto_snap ");
     EXEC += out_noised_spbr;
     system( EXEC.c_str() );
 

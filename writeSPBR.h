@@ -64,7 +64,8 @@ void writeSPBR( kvs::PolygonObject *_ply,
                             << _select_area_min_max[5] << std::endl;
 
     // Write to ouput file
-    unsigned int count_point_num = 0;
+    std::cout << "\nNow writing spbr file..." << std::endl;
+    unsigned int count_num_point = 0;
     for ( int i = 0; i < num; i++ ) {
         if ( (_select_area_min_max[0] <= coords[3*i]   && coords[3*i]   <= _select_area_min_max[3]) &&
              (_select_area_min_max[1] <= coords[3*i+1] && coords[3*i+1] <= _select_area_min_max[4]) &&
@@ -121,13 +122,15 @@ void writeSPBR( kvs::PolygonObject *_ply,
                         << r   << " " << g  << " " << b  << " " 
                         << std::endl;
             }
+            // end if
 
-            count_point_num++;
+            count_num_point++;
         } // end if
     } // end for
 
-    std::cout << "\nNumber of points before extraction\n>" << num << std::endl;
-    std::cout << "\nNumber of points after extraction\n>" << count_point_num << std::endl;
+    std::cout << "\nNumber of points before cropping\n> "   << num << std::endl;
+    std::cout << "\nNumber of points after cropping\n> "    << count_num_point << std::endl;
+    std::cout << "\nPoint set reduced to "    << int(count_num_point)/int(num)*100 << " (%)" << std::endl;
 
     fout.close();
 }
